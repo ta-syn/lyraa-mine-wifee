@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Romantic favicon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#120926"/>
+      <stop offset="100%" stop-color="#0b0617"/>
+    </linearGradient>
+    <linearGradient id="stroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f1d59a"/>
+      <stop offset="55%" stop-color="#d6b36f"/>
+      <stop offset="100%" stop-color="#e08eb1"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="38%" r="70%">
+      <stop offset="0%" stop-color="#e08eb1" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#120926" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#bg)"/>
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#glow)"/>
+  <rect x="4.5" y="4.5" width="55" height="55" rx="13.5" fill="none" stroke="#d6b36f" stroke-opacity="0.35"/>
+
+  <path d="M32 48.4C23.9 42.6 17 36.9 17 28.6C17 23.5 20.9 19.7 25.9 19.7C28.7 19.7 31 20.9 32 23.2C33 20.9 35.3 19.7 38.1 19.7C43.1 19.7 47 23.5 47 28.6C47 36.9 40.1 42.6 32 48.4Z"
+        fill="none"
+        stroke="url(#stroke)"
+        stroke-width="3.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <circle cx="23" cy="17" r="1.4" fill="#f7e6b8" fill-opacity="0.85"/>
+  <circle cx="41.8" cy="14.8" r="1" fill="#e08eb1" fill-opacity="0.9"/>
+</svg>
