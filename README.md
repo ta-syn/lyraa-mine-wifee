@@ -1,22 +1,42 @@
-# Wifee
+# 💖 Wifee
 
-A private, login-protected Next.js website with a personalized “Wife Day” experience.
+> A private, login-protected Next.js website crafted for a personalized **Wife Day** experience.
 
-## Tech Stack
+---
 
-- Next.js 16 (App Router)
-- React 19
-- Tailwind CSS 4
-- ESLint 9
+## ✨ Highlights
 
-## Requirements
+- 🔐 Cookie-based authentication with protected routes
+- 🎉 Beautiful multi-section romantic landing page
+- 🎵 Support for local image and song assets
+- ⚡ Built with latest Next.js App Router setup
+
+## 🧰 Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| UI | React 19 |
+| Styling | Tailwind CSS 4 |
+| Linting | ESLint 9 |
+
+## ✅ Requirements
 
 - Node.js 20+
 - npm
 
-## Environment Variables
+## 🚀 Quick Start
 
-Create `.env.local` in the project root:
+```bash
+npm install
+npm run dev
+```
+
+Open `http://localhost:3000` after the dev server starts.
+
+## 🔑 Environment Variables
+
+Create a `.env.local` file in the project root:
 
 ```env
 LOGIN_USERNAME=your_username
@@ -24,46 +44,51 @@ LOGIN_PASSWORD=your_password
 AUTH_COOKIE_VALUE=wifee-authorized
 ```
 
-- `LOGIN_USERNAME` and `LOGIN_PASSWORD` are required.
-- `AUTH_COOKIE_VALUE` is optional (default: `wifee-authorized`).
+- `LOGIN_USERNAME` → required
+- `LOGIN_PASSWORD` → required
+- `AUTH_COOKIE_VALUE` → optional (default: `wifee-authorized`)
 
-## Available Scripts
+## 📜 Scripts
 
 ```bash
-npm install
-npm run dev
-npm run build
-npm run start
-npm run lint
+npm run dev    # Start development server
+npm run build  # Build for production
+npm run start  # Start production server
+npm run lint   # Run ESLint
 ```
 
-## Authentication Flow
+## 🛡️ Authentication Flow
 
 - Public routes: `/login`, `/api/auth/login`, `/api/auth/logout`
-- Protected routes: all other routes
+- All other routes are protected
 - Auth cookie name: `wifee_auth`
-- Unauthenticated users are redirected to `/login?next=<requested-path>`
+- Unauthorized access redirects to: `/login?next=<requested-path>`
 
-## Main App Sections
+## 🧩 Homepage Sections
 
-The homepage is composed from section components under `app/sections/`, including:
+Homepage content is modular and managed from `app/sections/`:
 
 - Hero, Countdown, Wife Day, Reasons, Timeline
 - Notes, Promises, Memories, Stats
 - Letter, Quote, Marquee, Closing, Footer
 
-## Project Structure
+## 📁 Project Structure
 
-- `app/page.js` — protected main page
-- `app/login/page.js` — login screen
-- `app/api/auth/login/route.js` — login API
-- `app/api/auth/logout/route.js` — logout API
-- `app/sections/*` — homepage sections
-- `proxy.js` — auth gate and redirect logic
-- `public/image/*` — image assets
-- `public/song/*` — audio assets
+```text
+app/
+	page.js
+	login/page.js
+	api/auth/login/route.js
+	api/auth/logout/route.js
+	sections/*
+public/
+	image/*
+	song/*
+proxy.js
+```
 
-## Notes
+## 📝 Notes
 
-- Keep secrets in `.env.local` only.
-- If auth values change, restart the dev server.
+- Keep credentials only in `.env.local`
+- Restart server after changing environment values
+- Do not commit secret values to git
