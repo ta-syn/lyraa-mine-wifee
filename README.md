@@ -1,6 +1,13 @@
 # Wifee
 
-Private Next.js website with a login gate and an authenticated main page experience.
+A private, login-protected Next.js website with a personalized “Wife Day” experience.
+
+## Tech Stack
+
+- Next.js 16 (App Router)
+- React 19
+- Tailwind CSS 4
+- ESLint 9
 
 ## Requirements
 
@@ -9,7 +16,7 @@ Private Next.js website with a login gate and an authenticated main page experie
 
 ## Environment Variables
 
-Create a `.env.local` file in the project root:
+Create `.env.local` in the project root:
 
 ```env
 LOGIN_USERNAME=your_username
@@ -17,51 +24,46 @@ LOGIN_PASSWORD=your_password
 AUTH_COOKIE_VALUE=wifee-authorized
 ```
 
-Notes:
-- `LOGIN_USERNAME` and `LOGIN_PASSWORD` are required for login.
-- `AUTH_COOKIE_VALUE` is optional. If omitted, `wifee-authorized` is used.
+- `LOGIN_USERNAME` and `LOGIN_PASSWORD` are required.
+- `AUTH_COOKIE_VALUE` is optional (default: `wifee-authorized`).
 
-## Development
-
-Install dependencies:
+## Available Scripts
 
 ```bash
 npm install
-```
-
-Start dev server:
-
-```bash
 npm run dev
-```
-
-Build for production:
-
-```bash
 npm run build
-```
-
-Run production server:
-
-```bash
 npm run start
-```
-
-Lint:
-
-```bash
 npm run lint
 ```
 
-## Auth Flow
+## Authentication Flow
 
-- Public paths: `/login`, `/api/auth/login`, `/api/auth/logout`
-- Other paths require the `wifee_auth` cookie
-- Unauthorized users are redirected to `/login?next=<requested-path>`
+- Public routes: `/login`, `/api/auth/login`, `/api/auth/logout`
+- Protected routes: all other routes
+- Auth cookie name: `wifee_auth`
+- Unauthenticated users are redirected to `/login?next=<requested-path>`
 
-## Key Files
+## Main App Sections
 
-- `proxy.js`: route protection and redirect behavior
-- `app/login/page.js`: login UI and submit handling
-- `app/api/auth/login/route.js`: credential validation and auth cookie set
-- `app/api/auth/logout/route.js`: auth cookie clear
+The homepage is composed from section components under `app/sections/`, including:
+
+- Hero, Countdown, Wife Day, Reasons, Timeline
+- Notes, Promises, Memories, Stats
+- Letter, Quote, Marquee, Closing, Footer
+
+## Project Structure
+
+- `app/page.js` — protected main page
+- `app/login/page.js` — login screen
+- `app/api/auth/login/route.js` — login API
+- `app/api/auth/logout/route.js` — logout API
+- `app/sections/*` — homepage sections
+- `proxy.js` — auth gate and redirect logic
+- `public/image/*` — image assets
+- `public/song/*` — audio assets
+
+## Notes
+
+- Keep secrets in `.env.local` only.
+- If auth values change, restart the dev server.
