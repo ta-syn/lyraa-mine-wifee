@@ -4,6 +4,20 @@
 
 ---
 
+## 📌 Contents
+
+- [✨ Highlights](#-highlights)
+- [🧰 Tech Stack](#-tech-stack)
+- [✅ Requirements](#-requirements)
+- [🚀 Quick Start](#-quick-start)
+- [🔑 Environment Variables](#-environment-variables)
+- [📜 Scripts](#-scripts)
+- [🛡️ Authentication Flow](#️-authentication-flow)
+- [🧩 Homepage Sections](#-homepage-sections)
+- [📁 Project Structure](#-project-structure)
+- [🛠️ Troubleshooting](#️-troubleshooting)
+- [📝 Notes](#-notes)
+
 ## ✨ Highlights
 
 - 🔐 Cookie-based authentication with protected routes
@@ -76,15 +90,26 @@ Homepage content is modular and managed from `app/sections/`:
 
 ```text
 app/
-	page.js
-	login/page.js
-	api/auth/login/route.js
-	api/auth/logout/route.js
-	sections/*
+  page.js
+  login/page.js
+  api/auth/login/route.js
+  api/auth/logout/route.js
+  sections/*
 public/
-	image/*
-	song/*
+  image/*
+  song/*
 proxy.js
+```
+
+## 🛠️ Troubleshooting
+
+- If `next dev` shows lock error (`Unable to acquire lock at .next/dev/lock`), another dev server is already running.
+- To free the port and restart cleanly:
+
+```bash
+lsof -iTCP:3000 -sTCP:LISTEN -n -P
+kill -9 <PID>
+npm run dev
 ```
 
 ## 📝 Notes
