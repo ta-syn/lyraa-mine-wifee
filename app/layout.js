@@ -5,9 +5,9 @@ export const metadata = {
     default: "Yuki & Lyraa — My Wifee",
     template: "%s | Yuki & Lyraa",
   },
-  description: "A cinematic love-letter for Lyraa, celebrating March 3, 2026 with treasured memories, vows, and a forever kind of love.",
+  description: "A cinematic love-letter for Lyraa, celebrating March 4, 2026 with treasured memories, vows, and a forever kind of love.",
   applicationName: "Yuki & Lyraa",
-  keywords: ["love story", "wife day", "Yuki", "Lyraa", "March 3 2026", "romantic letter website"],
+  keywords: ["love story", "wife day", "Yuki", "Lyraa", "March 4 2026", "romantic letter website"],
   authors: [{ name: "Yuki" }],
   creator: "Yuki",
   icons: {
@@ -20,7 +20,7 @@ export const metadata = {
   },
   openGraph: {
     title: "Yuki & Lyraa — My Wifee",
-    description: "A cinematic love-letter for Lyraa, celebrating March 3, 2026.",
+    description: "A cinematic love-letter for Lyraa, celebrating March 4, 2026.",
     type: "website",
     locale: "en_US",
     siteName: "Yuki & Lyraa",
@@ -28,7 +28,7 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Yuki & Lyraa — My Wifee",
-    description: "A cinematic love-letter for Lyraa, celebrating March 3, 2026.",
+    description: "A cinematic love-letter for Lyraa, celebrating March 4, 2026.",
   },
 };
 

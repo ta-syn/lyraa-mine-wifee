@@ -45,7 +45,7 @@ export default function MemoriesSection() {
         <div className="bc">
           <div className="bc-n">05</div>
           <span className="bc-ico">🌅</span>
-          <span className="bc-tag">March 3, 2026</span>
+          <span className="bc-tag">March 4, 2026</span>
           <h3 className="bc-ttl">The day she became my wifee</h3>
           <p className="bc-body">The day everything became forever. The day I called her mine — fully, completely, endlessly. My wifee. My everything.</p>
           <div className="bc-arr">→</div>

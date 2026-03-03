@@ -9,7 +9,7 @@ export default function QuoteSection() {
           <br />
           and my forever place to return
         </p>
-        <div className="q-attr">— Yuki to his wifee Lyraa — March 3, 2026 — forever</div>
+        <div className="q-attr">— Yuki to his wifee Lyraa — March 4, 2026 — forever</div>
       </div>
     </section>
   );

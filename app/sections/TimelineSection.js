@@ -58,7 +58,7 @@ export default function TimelineSection() {
               <div className="tl-d" style={{ background: "var(--rose)", boxShadow: "0 0 22px rgba(212,130,154,.9)" }} />
             </div>
             <div className="tl-bdg" style={{ color: "var(--rose)" }}>
-              March 3 · 2026
+              March 4 · 2026
             </div>
           </div>
           <div className="tl-r">
@@ -66,7 +66,7 @@ export default function TimelineSection() {
               The Day ✦
             </div>
             <h3 className="tl-head">She became my wifee</h3>
-            <p className="tl-body">March 3, 2026 — the day my dua came true. The day I called her mine, fully and forever. The greatest day of my life.</p>
+            <p className="tl-body">March 4, 2026 — the day my dua came true. The day I called her mine, fully and forever. The greatest day of my life.</p>
           </div>
         </div>
         <div className="tl-item">

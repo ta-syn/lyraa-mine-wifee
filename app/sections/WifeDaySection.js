@@ -7,9 +7,9 @@ export default function WifeDaySection() {
         <span className="wd-tag">The day my forever officially began</span>
         <div className="wd-date-badge">
           <span>March</span>
-          <span />
-          <span>03</span>
-          <span />
+          <span className="wd-date-sep" />
+          <span>4</span>
+          <span className="wd-date-sep" />
           <span>2026</span>
         </div>
         <h2 className="wd-main">
@@ -24,7 +24,7 @@ export default function WifeDaySection() {
           <span style={{ animationDelay: ".8s" }}>💍</span>
         </div>
         <p className="wd-para">
-          From this day — <strong>March 3rd, 2026</strong> — you were no longer just the person I loved; you became my
+          From this day — <strong>March 4th, 2026</strong> — you were no longer just the person I loved; you became my
           <strong> wifee</strong>, my home, and my forever. I will carry this day in my chest for the rest of my life — the day I chose you with my whole heart, and you became
           <strong> my wifee, forever</strong>.
         </p>

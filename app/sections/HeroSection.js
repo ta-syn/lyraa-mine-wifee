@@ -32,10 +32,10 @@ export default function HeroSection() {
       </div>
 
       <div className="hero-side-l">Yuki &amp; Lyraa ✦ Written in forever</div>
-      <div className="hero-side-r">March 03 ✦ 2026 ✦ My Wifee</div>
+      <div className="hero-side-r">March 4 ✦ 2026 ✦ My Wifee</div>
 
       <div className="hero-wrap">
-        <div className="hero-eye">A love story only for you ✦ March 3, 2026</div>
+        <div className="hero-eye">A love story only for you ✦ March 4, 2026</div>
         <h1 className="hero-title">
           <span className="hn1">
             <span className="fill">Yuki</span>
@@ -61,21 +61,17 @@ export default function HeroSection() {
         <div className="hero-date-row">
           <div className="hero-date-pill">
             <span className="dpulse" />
-            Official since · March 3, 2026
+            Official since · March 4, 2026
           </div>
         </div>
 
         <p className="hero-sub">
           In this life and every life, <em>I choose you.</em>
         </p>
-      </div>
 
-      <div className="hero-scroll">
-        <span className="hs-t">Scroll</span>
-        <div className="hs-line-wrap">
-          <div className="hs-dot" />
-          <div className="hs-dot" />
-          <div className="hs-dot" />
+        <div className="hero-scroll">
+          <span className="hs-t">Scroll</span>
+          <div className="hs-l" />
         </div>
       </div>
     </section>

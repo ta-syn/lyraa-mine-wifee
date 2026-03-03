@@ -191,7 +191,7 @@ export default function Home() {
     };
 
     const updateCountdown = () => {
-      const target = new Date("2026-03-03T00:00:00Z").getTime();
+      const target = new Date(2026, 2, 4, 0, 0, 0, 0).getTime();
       const now = Date.now();
       const diff = Math.max(0, now - target);
       const d = Math.floor(diff / 86400000);

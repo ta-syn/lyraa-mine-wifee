@@ -47,7 +47,7 @@ export default function LoginPage() {
             <span className="auth-amp">&amp;</span>
             <span className="auth-name lyraa">Lyraa</span>
           </div>
-          <div className="auth-brand-bottom">March 3, 2026 · Forever</div>
+          <div className="auth-brand-bottom">March 4, 2026 · Forever</div>
         </div>
       </section>
 

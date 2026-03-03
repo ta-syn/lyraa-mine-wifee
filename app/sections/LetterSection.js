@@ -14,7 +14,7 @@ export default function LetterSection() {
           There are a thousand beautiful ways to begin this letter, but every version still starts with you. You are my first thought in the morning, my softest peace at night, and the warmth that makes every ordinary moment feel sacred.
           <br />
           <br />
-          You are not only the person I love. You are my <strong>wifee</strong> — in my heart, in my prayers, and in every future I dream of. Since <strong>March 3rd, 2026</strong>, everything has had your name on it. I am yours, and you are mine. That is the most beautiful truth of my life.
+          You are not only the person I love. You are my <strong>wifee</strong> — in my heart, in my prayers, and in every future I dream of. Since <strong>March 4th, 2026</strong>, everything has had your name on it. I am yours, and you are mine. That is the most beautiful truth of my life.
           <br />
           <br />
           I love you in the loudest ways and in the <strong>quietest, invisible ways</strong> — in every prayer for your happiness, in every little sacrifice made with joy, and in the way my heart still trembles knowing you chose me too.

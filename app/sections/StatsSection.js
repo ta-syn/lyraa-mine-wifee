@@ -18,8 +18,8 @@ export default function StatsSection() {
             <span className="stat-lbl">Person who holds my whole heart</span>
           </div>
           <div className="stat">
-            <span className="stat-ico">📅</span>
-            <span className="stat-num">Mar 3</span>
+            <span className="stat-ico">💖</span>
+            <span className="stat-num">Mar 4</span>
             <span className="stat-lbl">The day she became my wifee</span>
           </div>
           <div className="stat">

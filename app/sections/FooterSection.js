@@ -6,7 +6,7 @@ export default function FooterSection() {
           <div className="ft-brand-names">
             <em>Yuki</em> &amp; Lyraa
           </div>
-          <span className="ft-brand-date">Since March 03, 2026 ✦ My Beloved Wifee</span>
+          <span className="ft-brand-date">Since March 4, 2026 ✦ My Beloved Wifee</span>
           <p className="ft-brand-desc">
             A love story written with every piece of <strong>Yuki&apos;s</strong> heart — devoted to his wifee Lyraa, now and for all of eternity.
           </p>
@@ -18,7 +18,7 @@ export default function FooterSection() {
             <li>The day destiny introduced us</li>
             <li>Learning your heart</li>
             <li>The moment I knew</li>
-            <li>March 3, 2026 — The Day</li>
+            <li>March 4, 2026 — The Day</li>
             <li>Forever, one day at a time</li>
           </ul>
         </div>
@@ -39,12 +39,13 @@ export default function FooterSection() {
         <div className="ft-copy">
           Made with every piece of <strong>Yuki&apos;s</strong> heart — for his wifee Lyraa, his greatest blessing 💍
         </div>
-        <div className="ft-hearts">
-          <span>🌸</span>
-          <span>💍</span>
-          <span>🌸</span>
-        </div>
-        <div className="ft-right">Yuki &amp; Lyraa · March 3, 2026 · Forever Begins</div>
+        <div className="ft-right">Yuki &amp; Lyraa · March 4, 2026 · Forever Begins</div>
+      </div>
+
+      <div className="ft-top-btn-wrap">
+        <a href="#hero" className="ft-top-btn" aria-label="Back to top">
+          Back to Top ↑
+        </a>
       </div>
     </footer>
   );
