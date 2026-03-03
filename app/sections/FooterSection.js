@@ -6,7 +6,7 @@ export default function FooterSection() {
           <div className="ft-brand-names">
             <em>Yuki</em> &amp; Lyraa
           </div>
-          <span className="ft-brand-date">Since March 4, 2026 ✦ My Beloved Wifee</span>
+          <span className="ft-brand-date">Since March 4, 2026 ✦ Mine Beloved Wifee</span>
           <p className="ft-brand-desc">
             A love story written with every piece of <strong>Yuki&apos;s</strong> heart — devoted to his wifee Lyraa, now and for all of eternity.
           </p>
@@ -24,7 +24,7 @@ export default function FooterSection() {
         </div>
 
         <div>
-          <span className="ft-col-title">My Promises</span>
+          <span className="ft-col-title">Mine Promises</span>
           <ul className="ft-col-list">
             <li>Choose you, every day</li>
             <li>Be your home &amp; calm</li>

@@ -13,7 +13,7 @@ export default function TimelineSection() {
           <div className="tl-l">
             <div className="tl-tag">The Beginning</div>
             <h3 className="tl-head">The day we met</h3>
-            <p className="tl-body">I didn&apos;t realize it then, but that moment was destiny quietly introducing me to the love of my life.</p>
+            <p className="tl-body">I didn&apos;t realize it then, but that moment was destiny quietly introducing me to the love of mine life.</p>
           </div>
           <div className="tl-c">
             <div className="tl-do">
@@ -41,7 +41,7 @@ export default function TimelineSection() {
           <div className="tl-l">
             <div className="tl-tag">The Moment</div>
             <h3 className="tl-head">When I knew</h3>
-            <p className="tl-body">In one quiet, ordinary moment, everything became clear: you were my person, my peace, my forever — even before words could hold it.</p>
+            <p className="tl-body">In one quiet, ordinary moment, everything became clear: you were mine person, mine peace, mine forever — even before words could hold it.</p>
           </div>
           <div className="tl-c">
             <div className="tl-do">
@@ -65,15 +65,15 @@ export default function TimelineSection() {
             <div className="tl-tag" style={{ color: "var(--gold)" }}>
               The Day ✦
             </div>
-            <h3 className="tl-head">She became my wifee</h3>
-            <p className="tl-body">March 4, 2026 — the day my dua came true. The day I called her mine, fully and forever. The greatest day of my life.</p>
+            <h3 className="tl-head">She became mine wifee</h3>
+            <p className="tl-body">March 4, 2026 — the day mine dua came true. The day I called her mine, fully and forever. The greatest day of mine life.</p>
           </div>
         </div>
         <div className="tl-item">
           <div className="tl-l">
             <div className="tl-tag">Forever</div>
             <h3 className="tl-head">Every day, from now on</h3>
-            <p className="tl-body">Every adventure, every laugh, every soft evening — all of it, always, with you. My wifee Lyraa, my whole world.</p>
+            <p className="tl-body">Every adventure, every laugh, every soft evening — all of it, always, with you. Mine wifee Lyraa, mine whole world.</p>
           </div>
           <div className="tl-c">
             <div className="tl-do">

@@ -15,17 +15,17 @@ export default function StatsSection() {
           <div className="stat">
             <span className="stat-ico">🌟</span>
             <span className="stat-num">1</span>
-            <span className="stat-lbl">Person who holds my whole heart</span>
+            <span className="stat-lbl">Person who holds mine whole heart</span>
           </div>
           <div className="stat">
             <span className="stat-ico">💖</span>
             <span className="stat-num">Mar 4</span>
-            <span className="stat-lbl">The day she became my wifee</span>
+            <span className="stat-lbl">The day she became mine wifee</span>
           </div>
           <div className="stat">
             <span className="stat-ico">💍</span>
             <span className="stat-num">1</span>
-            <span className="stat-lbl">Wifee — my forever home</span>
+            <span className="stat-lbl">Wifee — mine forever home</span>
           </div>
         </div>
       </div>

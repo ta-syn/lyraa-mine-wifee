@@ -32,7 +32,7 @@ export default function HeroSection() {
       </div>
 
       <div className="hero-side-l">Yuki &amp; Lyraa ✦ Written in forever</div>
-      <div className="hero-side-r">March 4 ✦ 2026 ✦ My Wifee</div>
+      <div className="hero-side-r">March 4 ✦ 2026 ✦ Mine Wifee</div>
 
       <div className="hero-wrap">
         <div className="hero-eye">A love story only for you ✦ March 4, 2026</div>
@@ -41,20 +41,20 @@ export default function HeroSection() {
             <span className="fill">Yuki</span>
             Yuki
           </span>
-          <span className="ha">my forever, my peace, my home</span>
+          <span className="ha">mine forever, mine peace, mine home</span>
           <span className="hn2">Lyraa</span>
         </h1>
 
         <div className="hero-declare">
           <div className="hd-line" />
-          <div className="hd-text">My wifee ✦ My once-in-a-lifetime</div>
+          <div className="hd-text">Mine wifee ✦ Mine once-in-a-lifetime</div>
           <div className="hd-line right" />
         </div>
 
         <div className="hero-badge">
           <div className="h-badge-inner">
             <span className="h-badge-ring">💍</span>
-            Lyraa — my wifee, my calm, my eternity
+            Lyraa — mine wifee, mine calm, mine eternity
           </div>
         </div>
 

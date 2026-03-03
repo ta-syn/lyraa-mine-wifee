@@ -31,7 +31,7 @@ export default function MemoriesSection() {
           <span className="bc-ico">🌸</span>
           <span className="bc-tag">Your Laugh</span>
           <h3 className="bc-ttl">That laugh. Always that laugh.</h3>
-          <p className="bc-body">Unguarded, free, entirely yours. The most beautiful sound in my world. I will spend forever finding reasons to hear it again.</p>
+          <p className="bc-body">Unguarded, free, entirely yours. The most beautiful sound in mine world. I will spend forever finding reasons to hear it again.</p>
           <div className="bc-arr">→</div>
         </div>
         <div className="bc">
@@ -46,8 +46,8 @@ export default function MemoriesSection() {
           <div className="bc-n">05</div>
           <span className="bc-ico">🌅</span>
           <span className="bc-tag">March 4, 2026</span>
-          <h3 className="bc-ttl">The day she became my wifee</h3>
-          <p className="bc-body">The day everything became forever. The day I called her mine — fully, completely, endlessly. My wifee. My everything.</p>
+          <h3 className="bc-ttl">The day she became mine wifee</h3>
+          <p className="bc-body">The day everything became forever. The day I called her mine — fully, completely, endlessly. Mine wifee. Mine everything.</p>
           <div className="bc-arr">→</div>
         </div>
       </div>

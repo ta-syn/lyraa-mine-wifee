@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { playAuthActionSfx } from "../lib/actionSfx";
 
 export default function NavBar() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -8,6 +9,7 @@ export default function NavBar() {
   const handleLogout = async (event) => {
     event.preventDefault();
     if (isLoggingOut) return;
+    playAuthActionSfx("logout");
 
     setIsLoggingOut(true);
     try {

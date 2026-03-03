@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { playAuthActionSfx } from "../lib/actionSfx";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -10,6 +11,7 @@ export default function LoginPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    playAuthActionSfx("login");
     setError("");
     setLoading(true);
 
@@ -30,6 +32,8 @@ export default function LoginPage() {
 
       const params = new URLSearchParams(window.location.search);
       const nextPath = params.get("next") || "/";
+      window.sessionStorage.setItem("wifee_login_celebration", "1");
+      window.sessionStorage.setItem("wifee_login_celebration_until", String(Date.now() + 10000));
       window.location.href = nextPath;
     } catch {
       setError("Something went wrong. Please try again.");
@@ -54,7 +58,7 @@ export default function LoginPage() {
       <section className="auth-left">
         <div className="auth-shell">
           <span className="auth-eyebrow">Our Private Space</span>
-          <h1 className="auth-title">Welcome, my love</h1>
+          <h1 className="auth-title">Welcome, mine love</h1>
           <p className="auth-subtitle">Enter your credentials to open the story of us.</p>
 
           <form onSubmit={handleSubmit} className="auth-form">

@@ -3,22 +3,22 @@ export default function ReasonsSection() {
     <section className="reasons-s rv" id="reasons">
       <div className="reasons-hd">
         <h2 className="reasons-title">
-          Reasons I love <em>my wifee</em>
+          Reasons I love <em>mine wifee</em>
         </h2>
-        <p className="reasons-sub">Every single one is true — and my heart still keeps discovering more.</p>
+        <p className="reasons-sub">Every single one is true — and mine heart still keeps discovering more.</p>
       </div>
       <div className="reasons-grid">
         <div className="rcard">
           <div className="rcard-num">01</div>
           <span className="rcard-emoji">🌙</span>
           <h3 className="rcard-title">The way you exist</h3>
-          <p className="rcard-body">Just by being you, you make the world softer, brighter, and kinder. I thank Allah every day that you exist in my life.</p>
+          <p className="rcard-body">Just by being you, you make the world softer, brighter, and kinder. I thank Allah every day that you exist in mine life.</p>
         </div>
         <div className="rcard">
           <div className="rcard-num">02</div>
           <span className="rcard-emoji">😂</span>
           <h3 className="rcard-title">Your laugh</h3>
-          <p className="rcard-body">That laugh — pure, free, and entirely yours — is my favorite sound on earth. I could spend a lifetime trying to hear it one more time.</p>
+          <p className="rcard-body">That laugh — pure, free, and entirely yours — is mine favorite sound on earth. I could spend a lifetime trying to hear it one more time.</p>
         </div>
         <div className="rcard">
           <div className="rcard-num">03</div>
@@ -42,7 +42,7 @@ export default function ReasonsSection() {
           <div className="rcard-num">06</div>
           <span className="rcard-emoji">🏠</span>
           <h3 className="rcard-title">You feel like home</h3>
-          <p className="rcard-body">No matter where I am, your presence feels like home. You are my peace after every storm — my wifee, my forever person.</p>
+          <p className="rcard-body">No matter where I am, your presence feels like home. You are mine peace after every storm — mine wifee, mine forever person.</p>
         </div>
       </div>
     </section>

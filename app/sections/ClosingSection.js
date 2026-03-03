@@ -7,7 +7,7 @@ export default function ClosingSection() {
         <span className="cl-n1">Yuki</span>
         <span className="cl-hrt">💍</span>
         <span className="cl-n2">Lyraa</span>
-        <div className="cl-wifee">My wifee — now, tomorrow, and for every lifetime.</div>
+        <div className="cl-wifee">Mine wifee — now, tomorrow, and for every lifetime.</div>
         <div className="cl-sub">Always · Faithfully · Endlessly · Forever</div>
       </div>
     </section>

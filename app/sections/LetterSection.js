@@ -8,19 +8,19 @@ export default function LetterSection() {
       <div className="rv-r">
         <div className="slbl">From Yuki, with everything</div>
         <p className="l-text">
-          My dearest <strong>Lyraa</strong>,
+          Mine dearest <strong>Lyraa</strong>,
           <br />
           <br />
-          There are a thousand beautiful ways to begin this letter, but every version still starts with you. You are my first thought in the morning, my softest peace at night, and the warmth that makes every ordinary moment feel sacred.
+          There are a thousand beautiful ways to begin this letter, but every version still starts with you. You are mine first thought in the morning, mine softest peace at night, and the warmth that makes every ordinary moment feel sacred.
           <br />
           <br />
-          You are not only the person I love. You are my <strong>wifee</strong> — in my heart, in my prayers, and in every future I dream of. Since <strong>March 4th, 2026</strong>, everything has had your name on it. I am yours, and you are mine. That is the most beautiful truth of my life.
+          You are not only the person I love. You are mine <strong>wifee</strong> — in mine heart, in mine prayers, and in every future I dream of. Since <strong>March 4th, 2026</strong>, everything has had your name on it. I am yours, and you are mine. That is the most beautiful truth of mine life.
           <br />
           <br />
-          I love you in the loudest ways and in the <strong>quietest, invisible ways</strong> — in every prayer for your happiness, in every little sacrifice made with joy, and in the way my heart still trembles knowing you chose me too.
+          I love you in the loudest ways and in the <strong>quietest, invisible ways</strong> — in every prayer for your happiness, in every little sacrifice made with joy, and in the way mine heart still trembles knowing you chose me too.
         </p>
         <div className="l-sig">Yuki</div>
-        <div className="l-sig-sm">Written for my wifee — my favorite person in every universe.</div>
+        <div className="l-sig-sm">Written for mine wifee — mine favorite person in every universe.</div>
       </div>
     </section>
   );

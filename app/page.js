@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ClosingSection from "./sections/ClosingSection";
 import CountdownSection from "./sections/CountdownSection";
 import FooterSection from "./sections/FooterSection";
@@ -19,6 +19,8 @@ import TimelineSection from "./sections/TimelineSection";
 import WifeDaySection from "./sections/WifeDaySection";
 
 export default function Home() {
+  const [showCelebration, setShowCelebration] = useState(false);
+
   useEffect(() => {
     const listeners = [];
     const intervals = [];
@@ -51,117 +53,23 @@ export default function Home() {
       return id;
     };
 
+    const shouldCelebrate = window.sessionStorage.getItem("wifee_login_celebration") === "1";
+    const storedCelebrationUntil = Number(window.sessionStorage.getItem("wifee_login_celebration_until") || "0");
+    const fallbackCelebrationUntil = Date.now() + 10000;
+    const celebrationUntilAt = storedCelebrationUntil > Date.now() ? storedCelebrationUntil : fallbackCelebrationUntil;
+    const celebrationDurationMs = shouldCelebrate ? Math.max(0, celebrationUntilAt - Date.now()) : 0;
+
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    let soundOn = false;
-    let audioUnlocked = false;
-    let lastScrollSoundAt = 0;
+    let musicOn = true;
+    let sfxEnabled = true;
+    let celebrationActive = shouldCelebrate;
+    let deferMusicUntilCelebrationEnds = shouldCelebrate;
+    let lastScrollSfxAt = 0;
     let lastScrollY = window.scrollY;
-    let audioCtx = null;
-    let masterGain = null;
-    let masterFilter = null;
-
-    const getAudioContext = (allowCreate = false) => {
-      if (typeof window === "undefined") return null;
-      if (!allowCreate && !audioCtx) return null;
-      if (!audioCtx) {
-        const Ctor = window.AudioContext || window.webkitAudioContext;
-        if (!Ctor) return null;
-        audioCtx = new Ctor();
-      }
-      return audioCtx;
-    };
-
-    const unlockAudio = () => {
-      if (audioUnlocked) return;
-      const ctx = getAudioContext(true);
-      if (!ctx) return;
-      ctx.resume().catch(() => {});
-      audioUnlocked = true;
-    };
-
-    const getAudioGraph = () => {
-      if (!audioUnlocked) return null;
-      const ctx = getAudioContext();
-      if (!ctx) return null;
-      if (!masterGain) {
-        masterGain = ctx.createGain();
-        masterGain.gain.value = 1.45;
-
-        masterFilter = ctx.createBiquadFilter();
-        masterFilter.type = "lowpass";
-        masterFilter.frequency.value = 4200;
-        masterFilter.Q.value = 0.7;
-
-        masterFilter.connect(masterGain);
-        masterGain.connect(ctx.destination);
-      }
-      return { ctx, output: masterFilter };
-    };
-
-    const playTone = ({
-      frequency,
-      duration = 0.06,
-      gain = 0.02,
-      type = "sine",
-      attack = 0.008,
-      release = 0.06,
-      drift = 0.82,
-    }) => {
-      if (!soundOn) return;
-      const graph = getAudioGraph();
-      if (!graph) return;
-      const { ctx, output } = graph;
-      if (ctx.state === "suspended") {
-        ctx.resume().catch(() => {});
-      }
-
-      const startAt = ctx.currentTime + 0.001;
-      const endAt = startAt + duration;
-      const oscillator = ctx.createOscillator();
-      const envelope = ctx.createGain();
-
-      oscillator.type = type;
-      oscillator.frequency.setValueAtTime(frequency, startAt);
-      oscillator.frequency.exponentialRampToValueAtTime(Math.max(80, frequency * drift), endAt);
-
-      envelope.gain.setValueAtTime(0.0001, startAt);
-      envelope.gain.exponentialRampToValueAtTime(gain, startAt + Math.min(attack, duration / 2));
-      envelope.gain.exponentialRampToValueAtTime(0.0001, endAt + release);
-
-      oscillator.connect(envelope);
-      envelope.connect(output);
-      oscillator.start(startAt);
-      oscillator.stop(endAt + release + 0.02);
-    };
-
-    const playClickSound = (strong = false) => {
-      if (strong) {
-        playTone({ frequency: 560, duration: 0.05, gain: 0.028, type: "triangle", drift: 0.86 });
-        playTone({ frequency: 840, duration: 0.045, gain: 0.016, type: "sine", attack: 0.004, drift: 0.9 });
-      } else {
-        playTone({ frequency: 470, duration: 0.035, gain: 0.017, type: "sine", attack: 0.005, drift: 0.9 });
-      }
-    };
-
-    const playCuteCardSound = () => {
-      playTone({ frequency: 660, duration: 0.045, gain: 0.02, type: "triangle", attack: 0.003, drift: 0.96 });
-      playTone({ frequency: 990, duration: 0.055, gain: 0.015, type: "sine", attack: 0.003, drift: 0.97 });
-    };
-
-    const playScrollSound = (deltaY) => {
-      const magnitude = Math.min(1, Math.max(0, deltaY / 120));
-      const baseFrequency = 240 + magnitude * 90;
-      playTone({
-        frequency: baseFrequency,
-        duration: 0.03 + magnitude * 0.015,
-        gain: 0.009 + magnitude * 0.007,
-        type: "sine",
-        attack: 0.004,
-        release: 0.025,
-        drift: 0.92,
-      });
-    };
+    let hasUserActivatedMedia = false;
+    let celebrationLoopIntervalId = null;
+    let celebrationLoopStarted = false;
 
     const ensureBgMusic = () => {
       const audio = document.getElementById("bg-music");
@@ -170,6 +78,98 @@ export default function Home() {
       audio.preload = "auto";
       audio.volume = 0.42;
       return audio;
+    };
+
+    const ensureEffectAudio = (id, volume) => {
+      const audio = document.getElementById(id);
+      if (!(audio instanceof HTMLAudioElement)) return null;
+      audio.preload = "auto";
+      if (typeof volume === "number") audio.volume = volume;
+      return audio;
+    };
+
+    const unlockMedia = async () => {
+      if (hasUserActivatedMedia) return true;
+      const candidates = [
+        ensureBgMusic(),
+        ensureEffectAudio("sfx-click", 0.5),
+        ensureEffectAudio("sfx-scroll", 0.34),
+        ensureEffectAudio("sfx-celebration", 0.74),
+      ].filter(Boolean);
+
+      if (!candidates.length) return false;
+
+      let playedAtLeastOne = false;
+      await Promise.all(
+        candidates.map(async (audio) => {
+          const prevMuted = audio.muted;
+          audio.muted = true;
+          try {
+            await audio.play();
+            playedAtLeastOne = true;
+            audio.pause();
+            audio.currentTime = 0;
+          } catch {
+          } finally {
+            audio.muted = prevMuted;
+          }
+        }),
+      );
+
+      if (playedAtLeastOne) {
+        hasUserActivatedMedia = true;
+      }
+      return hasUserActivatedMedia;
+    };
+
+    const playEffect = (id, { volume, rate = 1, reset = true } = {}) => {
+      if (!sfxEnabled || !hasUserActivatedMedia) return;
+      const audio = ensureEffectAudio(id);
+      if (!audio) return;
+      if (typeof volume === "number") audio.volume = volume;
+      audio.playbackRate = rate;
+      if (reset) audio.currentTime = 0;
+      audio.play().catch(() => {});
+    };
+
+    const playClickSfx = (interactive = false) => {
+      playEffect("sfx-click", { volume: interactive ? 0.5 : 0.4, rate: interactive ? 1.02 : 0.96 });
+    };
+
+    const playCardSfx = () => {
+      playEffect("sfx-click", { volume: 0.56, rate: 0.93 });
+    };
+
+    const playButtonSfx = () => {
+      playEffect("sfx-click", { volume: 0.58, rate: 1.06 });
+    };
+
+    const playScrollSfx = (deltaY) => {
+      const strength = Math.min(1, Math.max(0, deltaY / 140));
+      const volume = 0.18 + strength * 0.14;
+      const rate = 0.9 + strength * 0.16;
+      playEffect("sfx-scroll", { volume, rate });
+    };
+
+    const playCelebrationSfx = () => {
+      playEffect("sfx-celebration", { volume: 0.8, rate: 1, reset: true });
+    };
+
+    const startCelebrationLoop = () => {
+      if (!celebrationActive || !hasUserActivatedMedia) return;
+      if (celebrationLoopStarted) return;
+      celebrationLoopStarted = true;
+      playCelebrationSfx();
+      celebrationLoopIntervalId = window.setInterval(() => {
+        if (!celebrationActive) return;
+        playCelebrationSfx();
+      }, 980);
+      intervals.push(() => {
+        if (celebrationLoopIntervalId !== null) {
+          window.clearInterval(celebrationLoopIntervalId);
+          celebrationLoopIntervalId = null;
+        }
+      });
     };
 
     const playBackgroundSong = async () => {
@@ -189,6 +189,32 @@ export default function Home() {
       if (!audio) return;
       audio.pause();
     };
+
+    if (shouldCelebrate) {
+      window.sessionStorage.removeItem("wifee_login_celebration");
+      window.sessionStorage.removeItem("wifee_login_celebration_until");
+      pauseBackgroundSong();
+      addTimeout(() => setShowCelebration(true), 0);
+      addTimeout(() => {
+        unlockMedia().then((unlocked) => {
+          if (unlocked && celebrationActive) {
+            startCelebrationLoop();
+          }
+        });
+      }, 0);
+      addTimeout(() => {
+        setShowCelebration(false);
+        celebrationActive = false;
+        deferMusicUntilCelebrationEnds = false;
+        if (celebrationLoopIntervalId !== null) {
+          window.clearInterval(celebrationLoopIntervalId);
+          celebrationLoopIntervalId = null;
+        }
+        if (musicOn) {
+          playBackgroundSong().catch(() => {});
+        }
+      }, celebrationDurationMs);
+    }
 
     const updateCountdown = () => {
       const target = new Date(2026, 2, 4, 0, 0, 0, 0).getTime();
@@ -309,34 +335,43 @@ export default function Home() {
       const btnLabel = btn.querySelector(".sb-label");
       const btnHint = btn.querySelector(".sb-hint");
 
-      const handleFirstGesture = () => {
-        unlockAudio();
+      const handleFirstGesture = async () => {
+        await unlockMedia();
+        if (celebrationActive) {
+          startCelebrationLoop();
+        } else {
+          playClickSfx(true);
+        }
+        if (musicOn && !deferMusicUntilCelebrationEnds) {
+          playBackgroundSong().catch(() => {});
+        }
       };
       addListener(window, "pointerdown", handleFirstGesture, { once: true, passive: true });
+      addListener(window, "touchstart", handleFirstGesture, { once: true, passive: true });
+      addListener(window, "click", handleFirstGesture, { once: true });
       addListener(window, "keydown", handleFirstGesture, { once: true });
 
       const update = () => {
-        if (btnIcon) btnIcon.textContent = soundOn ? "♫" : "♪";
-        if (btnLabel) btnLabel.textContent = soundOn ? "Music On" : "Music Off";
-        if (btnHint) btnHint.textContent = soundOn ? "Tap to mute" : "Tap to play";
-        btn.setAttribute("aria-pressed", soundOn ? "false" : "true");
-        btn.setAttribute("aria-label", soundOn ? "Mute background music" : "Play background music");
-        btn.classList.toggle("muted", !soundOn);
-        btn.classList.toggle("playing", soundOn);
+        if (btnIcon) btnIcon.textContent = musicOn ? "♫" : "♪";
+        if (btnLabel) btnLabel.textContent = musicOn ? "Music On" : "Music Off";
+        if (btnHint) btnHint.textContent = musicOn ? "Tap to mute" : "Tap to play";
+        btn.setAttribute("aria-pressed", musicOn ? "false" : "true");
+        btn.setAttribute("aria-label", musicOn ? "Mute background music" : "Play background music");
+        btn.classList.toggle("muted", !musicOn);
+        btn.classList.toggle("playing", musicOn);
       };
 
       addListener(btn, "click", async () => {
-        unlockAudio();
-        soundOn = !soundOn;
-        if (soundOn) {
+        await unlockMedia();
+        if (!celebrationActive) {
+          playButtonSfx();
+        }
+        musicOn = !musicOn;
+        if (musicOn) {
           const played = await playBackgroundSong();
           if (!played) {
-            soundOn = false;
-            update();
-            return;
+            pauseBackgroundSong();
           }
-          playTone({ frequency: 620, duration: 0.05, gain: 0.026, type: "triangle", drift: 0.9 });
-          playTone({ frequency: 930, duration: 0.06, gain: 0.017, type: "sine", attack: 0.004, drift: 0.94 });
         } else {
           pauseBackgroundSong();
         }
@@ -344,30 +379,47 @@ export default function Home() {
       });
 
       addListener(document, "pointerdown", (event) => {
-        unlockAudio();
+        if (!hasUserActivatedMedia) return;
+        if (celebrationActive) {
+          playCelebrationSfx();
+          return;
+        }
         const target = event.target;
         if (!(target instanceof HTMLElement)) return;
         if (target.closest("#sound-btn")) return;
+        if (target.closest("button")) {
+          playButtonSfx();
+          return;
+        }
         if (target.closest(".bc,.rcard,.vow,.note,.stat")) {
-          playCuteCardSound();
+          playCardSfx();
           return;
         }
         const isInteractive = !!target.closest("a,button,.nav-link,.nav-mobile-link,.bc,.rcard,.vow,.note,.stat");
-        playClickSound(isInteractive);
+        playClickSfx(isInteractive);
       });
 
       addListener(window, "scroll", () => {
         if (prefersReducedMotion) return;
+        if (celebrationActive) return;
         const now = performance.now();
         const delta = Math.abs(window.scrollY - lastScrollY);
         lastScrollY = window.scrollY;
         if (delta < 10) return;
-        if (now - lastScrollSoundAt < 120) return;
-        lastScrollSoundAt = now;
-        playScrollSound(delta);
+        if (now - lastScrollSfxAt < 120) return;
+        lastScrollSfxAt = now;
+        playScrollSfx(delta);
       });
 
+      if (celebrationActive && hasUserActivatedMedia) {
+        startCelebrationLoop();
+      }
+
       update();
+
+      if (musicOn && !deferMusicUntilCelebrationEnds) {
+        playBackgroundSong().catch(() => {});
+      }
     };
     setupSoundToggle();
 
@@ -499,16 +551,19 @@ export default function Home() {
       <div className="grain" />
       <canvas id="bgc" />
       <div id="scroll-prog" />
-      <button id="sound-btn" type="button" title="Toggle Music" aria-label="Play background music" aria-live="polite">
+      <button id="sound-btn" type="button" title="Toggle Music" aria-label="Mute background music" aria-live="polite">
         <span className="sb-icon" aria-hidden="true">
           ♫
         </span>
         <span className="sb-copy">
-          <span className="sb-label">Music Off</span>
-          <span className="sb-hint">Tap to play</span>
+          <span className="sb-label">Music On</span>
+          <span className="sb-hint">Tap to mute</span>
         </span>
       </button>
       <audio id="bg-music" src="/song/line-without-a-hook.mp3" loop preload="auto" />
+      <audio id="sfx-click" src="/song/click.wav" preload="auto" />
+      <audio id="sfx-scroll" src="/song/scroll.wav" preload="auto" />
+      <audio id="sfx-celebration" src="/song/celebration.wav" preload="auto" />
 
       <div id="loader">
         <canvas id="lcanv" />
@@ -530,6 +585,42 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {showCelebration && (
+        <div className="wife-celebrate" aria-hidden="true">
+          <div className="wife-celebrate-glow" />
+          <div className="wife-celebrate-rings">
+            <span className="wife-celebrate-ring" />
+            <span className="wife-celebrate-ring" />
+            <span className="wife-celebrate-ring" />
+          </div>
+          <div className="wife-celebrate-fireworks">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <span key={`fire-${index}`} className="wife-celebrate-firework" />
+            ))}
+          </div>
+          <div className="wife-celebrate-banner">She is mine now 💍✨</div>
+          <div className="wife-celebrate-rain">
+            {Array.from({ length: 56 }).map((_, index) => (
+              <span
+                key={index}
+                className="wife-celebrate-piece"
+                style={{
+                  "--x": `${((index * 17) % 100) + 1}%`,
+                  "--dur": `${4.2 + ((index * 7) % 30) / 10}s`,
+                  "--delay": `${-((index * 13) % 34) / 10}s`,
+                  "--drift": `${-28 + ((index * 11) % 56)}px`,
+                }}
+              />
+            ))}
+          </div>
+          <div className="wife-celebrate-sparkles">
+            {Array.from({ length: 20 }).map((_, index) => (
+              <span key={`spark-${index}`} className="wife-celebrate-sparkle" />
+            ))}
+          </div>
+        </div>
+      )}
 
       <NavBar />
       <MobileNav />

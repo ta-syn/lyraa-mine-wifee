@@ -2,7 +2,7 @@ import "./globals.css";
 
 export const metadata = {
   title: {
-    default: "Yuki & Lyraa — My Wifee",
+    default: "Yuki & Lyraa — Mine Wifee",
     template: "%s | Yuki & Lyraa",
   },
   description: "A cinematic love-letter for Lyraa, celebrating March 4, 2026 with treasured memories, vows, and a forever kind of love.",
@@ -19,7 +19,7 @@ export const metadata = {
     apple: "/favicon-romance.svg",
   },
   openGraph: {
-    title: "Yuki & Lyraa — My Wifee",
+    title: "Yuki & Lyraa — Mine Wifee",
     description: "A cinematic love-letter for Lyraa, celebrating March 4, 2026.",
     type: "website",
     locale: "en_US",
@@ -27,7 +27,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Yuki & Lyraa — My Wifee",
+    title: "Yuki & Lyraa — Mine Wifee",
     description: "A cinematic love-letter for Lyraa, celebrating March 4, 2026.",
   },
 };
