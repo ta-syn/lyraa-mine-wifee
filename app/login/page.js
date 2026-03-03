@@ -1,13 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { playAuthActionSfx } from "../lib/actionSfx";
 
 export default function LoginPage() {
+  const [showEntryLoader, setShowEntryLoader] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      setShowEntryLoader(false);
+    }, 2000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -40,6 +50,25 @@ export default function LoginPage() {
       setLoading(false);
     }
   };
+
+  if (showEntryLoader) {
+    return (
+      <div id="loader" role="status" aria-live="polite" aria-label="Loading login page">
+        <div id="lcanv" aria-hidden="true" />
+        <div className="ld-wrap">
+          <div className="ld-ring" aria-hidden="true">
+            <div className="ld-ring-inner">
+              <span className="ld-ico">💖</span>
+            </div>
+          </div>
+          <h2 className="ld-names">
+            Yuki <em>&amp;</em> Lyraa
+          </h2>
+          <p className="ld-sub">Preparing your private space...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <main className="auth-page">
@@ -78,16 +107,50 @@ export default function LoginPage() {
             <label className="auth-label" htmlFor="password">
               Password
             </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              className="auth-input"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              autoComplete="current-password"
-              required
-            />
+            <div className="auth-password-wrap">
+              <input
+                id="password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                className="auth-input"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                autoComplete="current-password"
+                required
+              />
+              <button
+                type="button"
+                className="auth-pass-toggle"
+                onClick={() => setShowPassword((prev) => !prev)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                aria-pressed={showPassword}
+              >
+                {showPassword ? (
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path
+                      d="M3 3l18 18m-9-3c-4.8 0-8.7-2.7-10.5-6 1-1.9 2.5-3.6 4.5-4.7m4.5-1.3c4.8 0 8.7 2.7 10.5 6-.7 1.4-1.7 2.7-3 3.7M9.9 9.9A3 3 0 0012 15a3 3 0 002.1-.9"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path
+                      d="M2.5 12S6.3 5.5 12 5.5 21.5 12 21.5 12 17.7 18.5 12 18.5 2.5 12 2.5 12Z"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                  </svg>
+                )}
+              </button>
+            </div>
 
             {error ? <p className="auth-error">{error}</p> : null}
 

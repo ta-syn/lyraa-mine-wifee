@@ -678,6 +678,47 @@ footer { position: relative; overflow: hidden; padding: 0; }
   box-shadow: 0 0 0 3px rgba(241, 213, 154, 0.2);
 }
 
+.auth-password-wrap {
+  position: relative;
+}
+
+.auth-password-wrap .auth-input {
+  padding-right: 5.2rem;
+}
+
+.auth-pass-toggle {
+  position: absolute;
+  top: 50%;
+  right: .6rem;
+  transform: translateY(-50%);
+  border: 1px solid rgba(214, 179, 111, 0.28);
+  background: rgba(18, 9, 38, 0.82);
+  color: var(--gold2);
+  border-radius: 10px;
+  width: 40px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  cursor: pointer;
+  transition: border-color .2s, background .2s, color .2s;
+}
+
+.auth-pass-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+.auth-pass-toggle:hover {
+  border-color: rgba(241, 213, 154, 0.58);
+  background: rgba(22, 12, 40, 0.95);
+}
+
+.auth-pass-toggle:focus-visible {
+  outline: 2px solid var(--gold2);
+  outline-offset: 2px;
+}
+
 .auth-error {
   color: #ffb4cb;
   font-size: .88rem;
